@@ -1,0 +1,11 @@
+@page "/notification"
+@inject IJSRuntime JS
+
+<button @onclick="RequestPermission">Habilitar Notificações</button>
+
+@code {
+    private async Task RequestPermission()
+    {
+        await JS.InvokeVoidAsync("requestPermission");
+    }
+}
