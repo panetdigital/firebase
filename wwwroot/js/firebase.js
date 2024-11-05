@@ -1,6 +1,6 @@
 // Verifica se o navegador suporta Service Worker e registra
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/firebase/firebase-messaging-sw.html')
+    navigator.serviceWorker.register('/firebase/firebase-messaging-sw.js')
         .then(function(registration) {
             console.log('Service Worker registrado com sucesso:', registration);
         })
