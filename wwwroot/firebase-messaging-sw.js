@@ -15,7 +15,21 @@ firebase.initializeApp({
 
 // Inicializa o Firebase Messaging
 const messaging = firebase.messaging();
-
+// Passe o Service Worker registrado
+navigator.serviceWorker.ready.then((registration) => {
+    messaging.useServiceWorker(registration);
+    messaging.getToken({ vapidKey: 'BMtr1VeKl-iQ0ODbeJJhewdxw0d_yaAkXdrPObqEtq9ekOXT_v_kuqBBt_C6iNaX3run_3uE2Ah3OLQf1t-aAXA' })
+        .then((currentToken) => {
+            if (currentToken) {
+                console.log("Token FCM obtido com sucesso:", currentToken);
+            } else {
+                console.warn("Nenhum token FCM disponível. Solicitação de permissão necessária.");
+            }
+        })
+        .catch((err) => {
+            console.error("Erro ao buscar token FCM:", err);
+        });
+});
 // Listener para mensagens em segundo plano quando o app está fechado ou em segundo plano
 messaging.onBackgroundMessage(function(payload) {
     console.log('[firebase-messaging-sw.js] Mensagem recebida em segundo plano', payload);
